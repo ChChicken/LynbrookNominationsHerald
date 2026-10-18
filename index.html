@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lynbrook LI Choice Nominations</title>
+<meta name="description" content="Nominate Lynbrook-area businesses in the 2027 Long Island Choice Awards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F3E9; --card:#FFFDF8; --ink:#22301F; --muted:#5E6A5B; --line:#DCD3BC;
+  --brand:#2E5B4C; --brand-ink:#FFFFFF; --soft:#E7EEE9; --gold:#B98A2E; --gold-soft:#F3E8C9;
+  --accent:#c0392b; --done:#2E7D4F; --done-soft:#DFF0E4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151B16; --card:#1E2620; --ink:#ECEFE8; --muted:#A7B2A4; --line:#34402F;
+    --brand:#5FA08A; --brand-ink:#0F1511; --soft:#24322B; --gold:#D9AE55; --gold-soft:#3A3220;
+    --accent:#E57366; --done:#6CC48F; --done-soft:#1F3627;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151B16; --card:#1E2620; --ink:#ECEFE8; --muted:#A7B2A4; --line:#34402F;
+  --brand:#5FA08A; --brand-ink:#0F1511; --soft:#24322B; --gold:#D9AE55; --gold-soft:#3A3220;
+  --accent:#E57366; --done:#6CC48F; --done-soft:#1F3627;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Public Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.45}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 96px}
+header{padding:28px 0 12px}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:'Fraunces',serif;font-size:clamp(26px,6vw,38px);line-height:1.1;margin:6px 0 10px}
+.sub{color:var(--muted);margin:0 0 16px}
+.ballot{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;padding:13px 20px;border-radius:12px;font-size:17px}
+.ballot:hover{filter:brightness(1.07)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.vote{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--brand);color:var(--brand);text-decoration:none;font-weight:700;padding:11px 18px;border-radius:12px;font-size:16px}
+.vote:hover{background:var(--soft)}
+.how{margin:18px 0 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.how summary{cursor:pointer;font-weight:700}
+.how ol{margin:10px 0 0;padding-left:20px}
+.how li{margin:4px 0}
+.progress{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+.prow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px}
+.prow b{font-size:16px}
+.bar{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
+.controls{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:99px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:var(--card);color:var(--ink);padding:7px 12px;font:inherit;font-size:14px;cursor:pointer}
+.seg button.on{background:var(--soft);font-weight:700}
+.tog{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);border:1px solid var(--line);background:var(--card);padding:7px 12px;border-radius:10px;cursor:pointer}
+.tog input{accent-color:var(--brand)}
+.list{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.card.empty{opacity:.75}
+.card.alldone{border-color:var(--done);box-shadow:inset 4px 0 0 var(--done)}
+.ch{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ch>div{min-width:0;flex:1}
+.ct{overflow-wrap:anywhere;font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin:0}
+.cd{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.go{flex:0 0 auto;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:7px 11px;border-radius:9px;white-space:nowrap}
+.go:hover{filter:brightness(1.07)}
+.go.sm{padding:5px 9px;font-size:12px}
+.noms{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.nom{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--bg)}
+.nom.done{background:var(--done-soft)}
+.nm{flex:1;min-width:0;font-weight:600;overflow-wrap:anywhere}
+.nm small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.btn.copied{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.star,.chk{border:0;background:none;cursor:pointer;font-size:20px;line-height:1;padding:4px;color:var(--muted)}
+.star.on{color:var(--gold)}
+.chk.on{color:var(--done)}
+.none{color:var(--muted);font-size:14px;margin:8px 0 0}
+.mine{background:var(--gold-soft)}
+.empty-state{text-align:center;color:var(--muted);padding:40px 0}
+footer{margin-top:28px;font-size:13px;color:var(--muted)}
+footer a{color:var(--brand)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">2027 Long Island Choice Awards</div>
+    <h1>Nominate Lynbrook businesses</h1>
+    <p class="sub">Nominations run <b>Oct. 15 to Nov. 15, 2026</b>. You can nominate once a day in each category. Nominate in 25+ categories to enter a $500 drawing.</p>
+    <div class="cta">
+      <a class="ballot" href="https://www.liherald.com/long-island-choice/#//" target="_blank" rel="noopener">Open the ballot ↗</a>
+    </div>
+    <details class="how">
+      <summary>How to nominate (1 minute)</summary>
+      <ol>
+        <li><b>Tap Copy</b> next to a business below.</li>
+        <li><b>Tap Nominate ↗</b> on that category. It opens the right section of the ballot.</li>
+        <li><b>Scroll</b> to the category, <b>paste</b> the name, and submit. Sign in with your email the first time.</li>
+        <li><b>Tap</b> ✓ here to track it. Checks reset each day.</li>
+      </ol>
+    </details>
+  </header>
+
+  <div class="progress">
+    <div class="prow"><span><b id="pcount">0</b> <span id="plabel">categories</span> nominated today</span><span id="pgoal">25 for the drawing</span></div>
+    <div class="bar"><i id="pbar"></i></div>
+  </div>
+
+  <div class="controls">
+    <input id="q" class="search" type="search" placeholder="Search a business or category" autocomplete="off">
+    <div class="chips" id="chips"></div>
+    <div class="toggles">
+      <div class="seg" role="group" aria-label="View">
+        <button id="vCat" class="on">By category</button><button id="vBiz">By business</button>
+      </div>
+      <label class="tog"><input type="checkbox" id="onlyMine"> ★ My list only</label>
+      <label class="tog"><input type="checkbox" id="showEmpty"> Show all 268 categories</label>
+    </div>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <footer>
+    Matches compiled from Lynbrook Chamber of Commerce member listings to help neighbors nominate local businesses. Not affiliated with the Herald or the Long Island Choice Awards. Official rules and ballot: <a href="https://yourchoiceawards.com/longisland/" target="_blank" rel="noopener">yourchoiceawards.com/longisland</a>.
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = [{"n": 1, "d": "Beauty, Health & Wellness", "c": "Addiction Rehabilitation Center", "m": []}, {"n": 2, "d": "Beauty, Health & Wellness", "c": "Allergist", "m": []}, {"n": 3, "d": "Beauty, Health & Wellness", "c": "Assisted Living Facility", "m": ["The Bristal Assisted Living at Lynbrook"]}, {"n": 4, "d": "Beauty, Health & Wellness", "c": "Audiologist", "m": ["Comprehensive Audiology"]}, {"n": 5, "d": "Beauty, Health & Wellness", "c": "Barber Shop", "m": []}, {"n": 6, "d": "Beauty, Health & Wellness", "c": "Beauty/Skincare Products", "m": ["Paramount Beauty Supply"]}, {"n": 7, "d": "Beauty, Health & Wellness", "c": "Botox Practice", "m": []}, {"n": 8, "d": "Beauty, Health & Wellness", "c": "Brain Center", "m": []}, {"n": 9, "d": "Beauty, Health & Wellness", "c": "Cardiologist", "m": ["Five Towns Heart and Imaging"]}, {"n": 10, "d": "Beauty, Health & Wellness", "c": "CBD Store", "m": []}, {"n": 11, "d": "Beauty, Health & Wellness", "c": "Chiropractor", "m": ["Corrective Chiropractic & Wellness", "Dr. Kentia Jean-Charles (Valor Spine & Joints)", "Ferrante Chiropractic"]}, {"n": 12, "d": "Beauty, Health & Wellness", "c": "Cosmetic Surgeon", "m": []}, {"n": 13, "d": "Beauty, Health & Wellness", "c": "Cosmetic Surgery Group", "m": []}, {"n": 14, "d": "Beauty, Health & Wellness", "c": "Dental Practice", "m": ["Family Dentistry of Lynbrook", "Perfect Smile Dental Arts. P.C."]}, {"n": 15, "d": "Beauty, Health & Wellness", "c": "Dentist", "m": ["Family Dentistry of Lynbrook", "Perfect Smile Dental Arts. P.C."]}, {"n": 16, "d": "Beauty, Health & Wellness", "c": "Dermatologist", "m": []}, {"n": 17, "d": "Beauty, Health & Wellness", "c": "Diagnostic/MRI & Radiology Imaging Center", "m": ["Five Towns Heart and Imaging"]}, {"n": 18, "d": "Beauty, Health & Wellness", "c": "Facial", "m": []}, {"n": 19, "d": "Beauty, Health & Wellness", "c": "Functional Medicine", "m": []}, {"n": 20, "d": "Beauty, Health & Wellness", "c": "General Practice Doctor", "m": ["Northwell Health Physician Partners"]}, {"n": 21, "d": "Beauty, Health & Wellness", "c": "Hair Salon", "m": ["Amani Salon and Spa", "B2bdrybar", "Earthtones Salon", "Tease Beauty Bar", "Vanexandras Hair Studio"]}, {"n": 22, "d": "Beauty, Health & Wellness", "c": "Hearing Aid Center", "m": ["Comprehensive Audiology"]}, {"n": 23, "d": "Beauty, Health & Wellness", "c": "Home Health Healthcare", "m": ["Geriatric Resource Homecare Agency", "Choice Care Group, Inc"]}, {"n": 24, "d": "Beauty, Health & Wellness", "c": "In Vitro Fertilization Facility", "m": []}, {"n": 25, "d": "Beauty, Health & Wellness", "c": "Laser Treatment Center", "m": []}, {"n": 26, "d": "Beauty, Health & Wellness", "c": "Local Pharmacy Drug Store", "m": ["Picker Pharmacy"]}, {"n": 27, "d": "Beauty, Health & Wellness", "c": "Manicure", "m": []}, {"n": 28, "d": "Beauty, Health & Wellness", "c": "Massage", "m": ["Touched By A Rose", "Lynbrook Massage Therapy"]}, {"n": 29, "d": "Beauty, Health & Wellness", "c": "Medical Spa", "m": []}, {"n": 30, "d": "Beauty, Health & Wellness", "c": "Medical Supply", "m": []}, {"n": 31, "d": "Beauty, Health & Wellness", "c": "Mental Health Services/Organization", "m": ["A Mindful Talk Health Services", "Mind Meets Movement Counseling Services, PLLC", "Open-Minded Therapy, LCSW, PLLC"]}, {"n": 32, "d": "Beauty, Health & Wellness", "c": "Neurologist", "m": []}, {"n": 33, "d": "Beauty, Health & Wellness", "c": "Neurosurgeon", "m": []}, {"n": 34, "d": "Beauty, Health & Wellness", "c": "Nursing Home", "m": ["Lynbrook Restorative Therapy & Nursing"]}, {"n": 35, "d": "Beauty, Health & Wellness", "c": "OB/GYN", "m": ["The Woman's Health Pavilion"]}, {"n": 36, "d": "Beauty, Health & Wellness", "c": "Occupational Therapy", "m": []}, {"n": 37, "d": "Beauty, Health & Wellness", "c": "Oncologist", "m": []}, {"n": 38, "d": "Beauty, Health & Wellness", "c": "Oncology Specialist Facility", "m": []}, {"n": 39, "d": "Beauty, Health & Wellness", "c": "Ophthalmologist", "m": []}, {"n": 40, "d": "Beauty, Health & Wellness", "c": "Optometrist", "m": []}, {"n": 41, "d": "Beauty, Health & Wellness", "c": "Orthodontist", "m": []}, {"n": 42, "d": "Beauty, Health & Wellness", "c": "Orthopedic Group", "m": []}, {"n": 43, "d": "Beauty, Health & Wellness", "c": "Orthopedist", "m": []}, {"n": 44, "d": "Beauty, Health & Wellness", "c": "Pain Management", "m": []}, {"n": 45, "d": "Beauty, Health & Wellness", "c": "Pediatric Dentist", "m": []}, {"n": 46, "d": "Beauty, Health & Wellness", "c": "Pediatrician", "m": []}, {"n": 47, "d": "Beauty, Health & Wellness", "c": "Pedicure", "m": []}, {"n": 48, "d": "Beauty, Health & Wellness", "c": "Physical Therapist", "m": ["All Fit Physical Therapy, PC", "Quality Movement Restoration PT"]}, {"n": 49, "d": "Beauty, Health & Wellness", "c": "Physical Therapy", "m": ["All Fit Physical Therapy, PC", "Quality Movement Restoration PT"]}, {"n": 50, "d": "Beauty, Health & Wellness", "c": "Podiatrist", "m": []}, {"n": 51, "d": "Beauty, Health & Wellness", "c": "Rehabilitation Center", "m": ["Lynbrook Restorative Therapy & Nursing"]}, {"n": 52, "d": "Beauty, Health & Wellness", "c": "Spa", "m": ["Amani Salon and Spa"]}, {"n": 53, "d": "Beauty, Health & Wellness", "c": "Speech Language / OT / PT \u2013 Multi Disciplinary", "m": []}, {"n": 54, "d": "Beauty, Health & Wellness", "c": "Speech Therapy", "m": []}, {"n": 55, "d": "Beauty, Health & Wellness", "c": "Spine Center", "m": ["Valor Spine & Joints"]}, {"n": 56, "d": "Beauty, Health & Wellness", "c": "Urgent Care Center", "m": []}, {"n": 57, "d": "Beauty, Health & Wellness", "c": "Waxing", "m": []}, {"n": 58, "d": "Beauty, Health & Wellness", "c": "Weight Loss/Nutrition Center", "m": []}, {"n": 59, "d": "Dining", "c": "All-Around Restaurant", "m": ["Craft Kitchen & Taphouse", "Elsie Lane", "Pearsall's Station", "River Mill Tavern & Tables", "Selita's Restaurant & Bar", "Gourmology"]}, {"n": 60, "d": "Dining", "c": "Asian Fusion", "m": []}, {"n": 61, "d": "Dining", "c": "Bagel Store (Single Location)", "m": []}, {"n": 62, "d": "Dining", "c": "Bagel Store (Multiple Locations)", "m": []}, {"n": 63, "d": "Dining", "c": "Bakery", "m": ["Francine's Cakes", "Prosperi Bakery Inc.", "Sweet Peace Specialty Cakes"]}, {"n": 64, "d": "Dining", "c": "BBQ", "m": ["The Filthy Pig BBQ / Beckmann's Delicatessen"]}, {"n": 65, "d": "Dining", "c": "Breakfast", "m": []}, {"n": 66, "d": "Dining", "c": "Brunch", "m": ["Elsie Lane", "River Mill Tavern & Tables"]}, {"n": 67, "d": "Dining", "c": "Buffet", "m": []}, {"n": 68, "d": "Dining", "c": "Burger", "m": []}, {"n": 69, "d": "Dining", "c": "Business Lunch", "m": []}, {"n": 70, "d": "Dining", "c": "Butcher Shop", "m": []}, {"n": 71, "d": "Dining", "c": "Caribbean Food", "m": []}, {"n": 72, "d": "Dining", "c": "Catering Company", "m": ["Gourmology", "Polly Talbott's A la Carte", "F & L Deli & Catering", "Lynbrook Deli and Catering", "The Filthy Pig BBQ / Beckmann's Delicatessen", "Back Alley Eats"]}, {"n": 73, "d": "Dining", "c": "Chili", "m": []}, {"n": 74, "d": "Dining", "c": "Chinese Food", "m": ["So Far So Good Chinese Restaurant"]}, {"n": 75, "d": "Dining", "c": "Cocktails", "m": ["Elsie Lane"]}, {"n": 76, "d": "Dining", "c": "Deli/Sandwich Shop", "m": ["F & L Deli & Catering", "Lynbrook Deli and Catering", "The Filthy Pig BBQ / Beckmann's Delicatessen"]}, {"n": 77, "d": "Dining", "c": "Dessert", "m": ["Sweet Peace Specialty Cakes", "Prosperi Bakery Inc.", "Francine's Cakes"]}, {"n": 78, "d": "Dining", "c": "Diner", "m": []}, {"n": 79, "d": "Dining", "c": "Dining Experience", "m": []}, {"n": 80, "d": "Dining", "c": "Doughnuts", "m": []}, {"n": 81, "d": "Dining", "c": "Farm Stand", "m": []}, {"n": 82, "d": "Dining", "c": "Fine Dining", "m": ["Livorno Ristorante", "Il Luogo Restaurant", "Prime 39 Restaurant"]}, {"n": 83, "d": "Dining", "c": "Fish Market", "m": []}, {"n": 84, "d": "Dining", "c": "Food Truck", "m": []}, {"n": 85, "d": "Dining", "c": "French Fries", "m": []}, {"n": 86, "d": "Dining", "c": "Fried Chicken", "m": []}, {"n": 87, "d": "Dining", "c": "Gelato", "m": []}, {"n": 88, "d": "Dining", "c": "German Food", "m": []}, {"n": 89, "d": "Dining", "c": "Greek Food", "m": []}, {"n": 90, "d": "Dining", "c": "Happy Hour", "m": ["Johnny McGorey's", "Craft Kitchen & Taphouse", "Michaleen Flynn's", "Pearsall's Station", "Selita's Restaurant & Bar", "Elsie Lane"]}, {"n": 91, "d": "Dining", "c": "Ice Cream", "m": []}, {"n": 92, "d": "Dining", "c": "Indian Food", "m": []}, {"n": 93, "d": "Dining", "c": "Italian Food", "m": ["Il Luogo Restaurant", "Livorno Ristorante", "Focaris Restaurant", "Vincent's Pizzeria & Restaurant"]}, {"n": 94, "d": "Dining", "c": "Japanese Food", "m": ["Inatome's HibachiBachi Lynbrook"]}, {"n": 95, "d": "Dining", "c": "Latin Food", "m": []}, {"n": 96, "d": "Dining", "c": "Local Coffee Shop", "m": []}, {"n": 97, "d": "Dining", "c": "Mediterranean Food", "m": ["Hummus Fit"]}, {"n": 98, "d": "Dining", "c": "Mexican Food", "m": []}, {"n": 99, "d": "Dining", "c": "New Restaurant", "m": []}, {"n": 100, "d": "Dining", "c": "Organic/Natural Food", "m": ["Hummus Fit"]}, {"n": 101, "d": "Dining", "c": "Outdoor Dining", "m": ["River Mill Tavern & Tables", "Craft Kitchen & Taphouse"]}, {"n": 102, "d": "Dining", "c": "Pizza", "m": ["Vincent's Pizzeria & Restaurant", "Focaris Restaurant"]}, {"n": 103, "d": "Dining", "c": "Pretzel", "m": []}, {"n": 104, "d": "Dining", "c": "Ramen", "m": []}, {"n": 105, "d": "Dining", "c": "Romantic Restaurant", "m": ["Livorno Ristorante"]}, {"n": 106, "d": "Dining", "c": "Salads", "m": ["Hummus Fit"]}, {"n": 107, "d": "Dining", "c": "Seafood", "m": []}, {"n": 108, "d": "Dining", "c": "Shakes", "m": []}, {"n": 109, "d": "Dining", "c": "Smoothie", "m": []}, {"n": 110, "d": "Dining", "c": "Specialty Pizza", "m": []}, {"n": 111, "d": "Dining", "c": "Steakhouse", "m": ["Prime 39 Restaurant"]}, {"n": 112, "d": "Dining", "c": "Sushi", "m": ["Inatome's HibachiBachi Lynbrook"]}, {"n": 113, "d": "Dining", "c": "Tacos", "m": []}, {"n": 114, "d": "Dining", "c": "Thai Food", "m": []}, {"n": 115, "d": "Dining", "c": "Vegetarian/Vegan", "m": ["Hummus Fit"]}, {"n": 116, "d": "Dining", "c": "Wings", "m": []}, {"n": 117, "d": "Dining", "c": "Yogurt", "m": []}, {"n": 118, "d": "Entertainment & Leisure", "c": "Art Gallery", "m": []}, {"n": 119, "d": "Entertainment & Leisure", "c": "Bowling", "m": []}, {"n": 120, "d": "Entertainment & Leisure", "c": "Concert Venue", "m": []}, {"n": 121, "d": "Entertainment & Leisure", "c": "Escape Room", "m": []}, {"n": 122, "d": "Entertainment & Leisure", "c": "Family Amusement", "m": ["Regal Cinemas"]}, {"n": 123, "d": "Entertainment & Leisure", "c": "Party Company", "m": ["No Limit Party Rentals"]}, {"n": 124, "d": "Entertainment & Leisure", "c": "Performing Arts Venue", "m": []}, {"n": 125, "d": "Entertainment & Leisure", "c": "Photo Booth", "m": ["Capture the Night Photo Booths"]}, {"n": 126, "d": "Finance", "c": "Accountant", "m": ["Ryan Hode", "Andrew Fudrini CPA P.C.", "Goldgrab CPA PLLC"]}, {"n": 127, "d": "Finance", "c": "Accounting Firm", "m": ["Goldgrab CPA PLLC", "AVMDeMars CPA"]}, {"n": 128, "d": "Finance", "c": "Bank", "m": ["First Central Savings Bank", "Webster Bank"]}, {"n": 129, "d": "Finance", "c": "Credit Union", "m": []}, {"n": 130, "d": "Finance", "c": "Financial Advisor", "m": ["Downtown Financial Group", "Edward Jones", "Westco Financial Group", "Blue Ocean Wealth Solutions", "Merrill Lynch"]}, {"n": 131, "d": "Finance", "c": "Insurance Agent", "m": ["Melissa Matassa - Geico", "AFLAC (Lynbrook agent)", "NGL Insurance Group", "Simon Paston & Sons", "Statewide Independent Brokers Inc", "Umanoff Boyer Insurance Agency, LLC", "MEDIHEALTH OPTIONS LLC"]}, {"n": 132, "d": "Finance", "c": "Insurance Company", "m": ["New York Life Insurance Company", "Statewide Independent Brokers Inc", "Downtown Financial Group"]}, {"n": 133, "d": "Finance", "c": "Wealth Management Firm", "m": ["Blue Ocean Wealth Solutions", "Merrill Lynch", "Downtown Financial Group", "Westco Financial Group"]}, {"n": 134, "d": "Home & Home Services", "c": "55+ Community", "m": []}, {"n": 135, "d": "Home & Home Services", "c": "Air Conditioning/HVAC & Heating Company", "m": ["Cool Bros Corp", "Daikin Comfort Technologies"]}, {"n": 136, "d": "Home & Home Services", "c": "Basement Services", "m": []}, {"n": 137, "d": "Home & Home Services", "c": "Chimney Cleaning Services Company", "m": []}, {"n": 138, "d": "Home & Home Services", "c": "Cleaning Service", "m": []}, {"n": 139, "d": "Home & Home Services", "c": "Electrical Company", "m": []}, {"n": 140, "d": "Home & Home Services", "c": "Fence Company", "m": []}, {"n": 141, "d": "Home & Home Services", "c": "Flooring", "m": []}, {"n": 142, "d": "Home & Home Services", "c": "Gas/Propane Company", "m": []}, {"n": 143, "d": "Home & Home Services", "c": "Heating Oil Company", "m": []}, {"n": 144, "d": "Home & Home Services", "c": "Home Builder Developer", "m": []}, {"n": 145, "d": "Home & Home Services", "c": "Home Contractor/Repair/Remodeling Company", "m": ["Lanzello Remodeling", "Malatesta Paladino Inc."]}, {"n": 146, "d": "Home & Home Services", "c": "Home Security", "m": []}, {"n": 147, "d": "Home & Home Services", "c": "Interior Design", "m": ["B & B Interiors, Inc"]}, {"n": 148, "d": "Home & Home Services", "c": "Kitchen & Bath", "m": ["Rustic Loft", "ShowerCrafters", "C & L Plumbing Supply Inc."]}, {"n": 149, "d": "Home & Home Services", "c": "Landscaper & Design Company", "m": []}, {"n": 150, "d": "Home & Home Services", "c": "Mortgage Lending Company", "m": ["Great Northern Mortgage Corp.", "Quintessential Mortgage Group", "First Central Savings Bank"]}, {"n": 151, "d": "Home & Home Services", "c": "Moving Services", "m": []}, {"n": 152, "d": "Home & Home Services", "c": "Pest Control Company", "m": ["Allways Exterminating Company", "Fox Pest Control"]}, {"n": 153, "d": "Home & Home Services", "c": "Plumber", "m": ["Mako Plumbing & Heating Inc."]}, {"n": 154, "d": "Home & Home Services", "c": "Professional Home Organizers", "m": ["Organized Therapy"]}, {"n": 155, "d": "Home & Home Services", "c": "Roofing Company", "m": []}, {"n": 156, "d": "Home & Home Services", "c": "Siding Company", "m": []}, {"n": 157, "d": "Home & Home Services", "c": "Solar Company", "m": []}, {"n": 158, "d": "Home & Home Services", "c": "Stone/Masonry", "m": []}, {"n": 159, "d": "Home & Home Services", "c": "Swimming Pool Builder", "m": []}, {"n": 160, "d": "Home & Home Services", "c": "Tree Service Company", "m": []}, {"n": 161, "d": "Home & Home Services", "c": "Windows Company", "m": []}, {"n": 162, "d": "Kids & Education", "c": "Adult Education-Continuing Education", "m": []}, {"n": 163, "d": "Kids & Education", "c": "Art School", "m": ["Children's Art Classes of East Rockaway", "The Pottery Workshop"]}, {"n": 164, "d": "Kids & Education", "c": "Charter/Parochial/Private School", "m": []}, {"n": 165, "d": "Kids & Education", "c": "College/University", "m": []}, {"n": 166, "d": "Kids & Education", "c": "College/University President", "m": []}, {"n": 167, "d": "Kids & Education", "c": "Dance School", "m": ["Dance Workshop", "Starz on Broadway LLC"]}, {"n": 168, "d": "Kids & Education", "c": "Day Camp", "m": ["Rolling River Day Camp"]}, {"n": 169, "d": "Kids & Education", "c": "Day Care", "m": []}, {"n": 170, "d": "Kids & Education", "c": "Driving School", "m": []}, {"n": 171, "d": "Kids & Education", "c": "Gymnastics Center", "m": ["The Little Gym of Lynbrook"]}, {"n": 172, "d": "Kids & Education", "c": "High School Principal", "m": ["Salvatore Breschia - Lynbrook High School"]}, {"n": 173, "d": "Kids & Education", "c": "Kids Birthday Parties", "m": ["The Hotspot Studios Lynbrook", "The Little Gym of Lynbrook", "The Pottery Workshop"]}, {"n": 174, "d": "Kids & Education", "c": "Learning Center/Tutor", "m": ["Huntington Learning Center"]}, {"n": 175, "d": "Kids & Education", "c": "Martial Arts", "m": ["Ryu's Martial Arts"]}, {"n": 176, "d": "Kids & Education", "c": "Music Schools/Classes", "m": ["School of Rock Rockville Centre"]}, {"n": 177, "d": "Kids & Education", "c": "Nursery School", "m": []}, {"n": 178, "d": "Kids & Education", "c": "Sports Camp", "m": []}, {"n": 179, "d": "People & Places", "c": "Event Venue", "m": []}, {"n": 180, "d": "People & Places", "c": "Hotel", "m": []}, {"n": 181, "d": "People & Places", "c": "Local Tourist Attraction", "m": []}, {"n": 182, "d": "People & Places", "c": "Museum", "m": ["Historical Society of East Rockaway/Lynbrook"]}, {"n": 183, "d": "People & Places", "c": "Place to Have a Party", "m": ["The Hotspot Studios Lynbrook"]}, {"n": 184, "d": "People & Places", "c": "Place to Worship", "m": ["Lynbrook Baptist Church", "St James UMC", "Temple Am Echad"]}, {"n": 185, "d": "People & Places", "c": "Wedding Venue", "m": []}, {"n": 186, "d": "Services", "c": "Advertising Agency", "m": ["Felt Marketing Solutions", "Eric Donaldson"]}, {"n": 187, "d": "Services", "c": "Animal Adoption/Rescue Services", "m": []}, {"n": 188, "d": "Services", "c": "Appliance Repair Store", "m": []}, {"n": 189, "d": "Services", "c": "Arbitration & Mediation Firm", "m": []}, {"n": 190, "d": "Services", "c": "Architect", "m": []}, {"n": 191, "d": "Services", "c": "Car Wash", "m": []}, {"n": 192, "d": "Services", "c": "Car/Limo Service", "m": []}, {"n": 193, "d": "Services", "c": "Cemeteries", "m": []}, {"n": 194, "d": "Services", "c": "Corporate Law Firm", "m": []}, {"n": 195, "d": "Services", "c": "Divorce Attorney", "m": ["Gary Port, Esq."]}, {"n": 196, "d": "Services", "c": "Dry Cleaner", "m": ["Jami's Cleaners"]}, {"n": 197, "d": "Services", "c": "Elder Law Attorney", "m": []}, {"n": 198, "d": "Services", "c": "Estate Planning Attorney", "m": []}, {"n": 199, "d": "Services", "c": "Family Law Firm", "m": ["Port & Sava"]}, {"n": 200, "d": "Services", "c": "Female Mentoring Group", "m": []}, {"n": 201, "d": "Services", "c": "Funeral Home", "m": ["Flinch & Bruns Funeral Home", "Perry's Funeral Home"]}, {"n": 202, "d": "Services", "c": "Green Business", "m": []}, {"n": 203, "d": "Services", "c": "Health Care Law Firm", "m": []}, {"n": 204, "d": "Services", "c": "Immigration Law Firm", "m": []}, {"n": 205, "d": "Services", "c": "Labor Law Firm", "m": ["The Marlborough Law Firm, P.C."]}, {"n": 206, "d": "Services", "c": "Law Firm (Overall) over 35 employees", "m": []}, {"n": 207, "d": "Services", "c": "Law Firm (Overall) under 35 employees", "m": ["Stockman & Poropat, PLLC", "Vincent L Petraro PLLC"]}, {"n": 208, "d": "Services", "c": "Litigation/Business Litigation Law Firm", "m": ["Stockman & Poropat, PLLC"]}, {"n": 209, "d": "Services", "c": "Matrimonial Law Firm", "m": ["Port & Sava"]}, {"n": 210, "d": "Services", "c": "Nonprofit Organization", "m": ["Historical Society of East Rockaway/Lynbrook", "Disabled American Veterans (Lynbrook Chapter)", "Lynbrook American Legion Post 335", "Lynbrook Kiwanis", "Lynbrook VFW Post 2307", "New York Elks Lodge #1", "Per Sempre Lodge 2344"]}, {"n": 211, "d": "Services", "c": "Personal Injury Attorney \u2013 Firm", "m": ["Sheharyar Ali Law Group", "The Glassman Law Group"]}, {"n": 212, "d": "Services", "c": "Pet Groomer", "m": ["Long Island Pet Spa"]}, {"n": 213, "d": "Services", "c": "Photographer", "m": []}, {"n": 214, "d": "Services", "c": "Property Tax Reduction Services", "m": []}, {"n": 215, "d": "Services", "c": "Public Relations Company", "m": ["Corbett Public Relations"]}, {"n": 216, "d": "Services", "c": "Real Estate Law Attorney", "m": []}, {"n": 217, "d": "Services", "c": "Real Estate Law Firm", "m": []}, {"n": 218, "d": "Services", "c": "Self-Storage Company", "m": []}, {"n": 219, "d": "Services", "c": "Tax Law Firm", "m": []}, {"n": 220, "d": "Services", "c": "Travel Agency", "m": ["Julie's Star Travel Agency"]}, {"n": 221, "d": "Services", "c": "Veterinarian", "m": ["Hilton Hospital for Animals"]}, {"n": 222, "d": "Shopping", "c": "Antique Store", "m": []}, {"n": 223, "d": "Shopping", "c": "Appliance/Home Electronics Store", "m": []}, {"n": 224, "d": "Shopping", "c": "Boutique", "m": ["Bill Boutique LLC", "Zaraz Collection (Haila Atelier & Collection)"]}, {"n": 225, "d": "Shopping", "c": "Cannabis Dispensary", "m": []}, {"n": 226, "d": "Shopping", "c": "Carpet Store", "m": []}, {"n": 227, "d": "Shopping", "c": "Collectibles Store", "m": ["LI Comic Shop", "Trainland"]}, {"n": 228, "d": "Shopping", "c": "Consignment/Thrift Store", "m": []}, {"n": 229, "d": "Shopping", "c": "Eyewear Store", "m": []}, {"n": 230, "d": "Shopping", "c": "Florist", "m": []}, {"n": 231, "d": "Shopping", "c": "Gift Shop", "m": ["Trainland"]}, {"n": 232, "d": "Shopping", "c": "Gourmet Market", "m": []}, {"n": 233, "d": "Shopping", "c": "Grocery/Supermarket", "m": []}, {"n": 234, "d": "Shopping", "c": "Healthy Market", "m": []}, {"n": 235, "d": "Shopping", "c": "Local Children's Clothing", "m": ["Mur-Lees Mens & Boys Wear"]}, {"n": 236, "d": "Shopping", "c": "Local Hardware Store", "m": ["Michaels Electric Supply", "US Lumber & Supply"]}, {"n": 237, "d": "Shopping", "c": "Local Jewelry Store", "m": ["Unicorn Jewels", "John Zangler Expert Watch and Jewelry"]}, {"n": 238, "d": "Shopping", "c": "Local Men's Clothing", "m": ["Mur-Lees Mens & Boys Wear", "Bill Boutique LLC"]}, {"n": 239, "d": "Shopping", "c": "Local Women's Clothing", "m": ["Zaraz Collection (Haila Atelier & Collection)"]}, {"n": 240, "d": "Shopping", "c": "Nursery & Garden Center", "m": []}, {"n": 241, "d": "Shopping", "c": "Pawn Shop", "m": []}, {"n": 242, "d": "Shopping", "c": "Window Treatment Store", "m": []}, {"n": 243, "d": "Sports", "c": "Boxing Center", "m": ["Mayweather Boxing+Fitness"]}, {"n": 244, "d": "Sports", "c": "CrossFit Gym", "m": []}, {"n": 245, "d": "Sports", "c": "Gym & Fitness Center", "m": ["5 Corners Fitness", "Flo Fitness", "Iron Monkey Strength", "Mayweather Boxing+Fitness"]}, {"n": 246, "d": "Sports", "c": "Ice Skating Rink", "m": []}, {"n": 247, "d": "Sports", "c": "Kids' Sports League", "m": ["Lynbrook Little League", "Lynbrook Knights Youth Baseball Club Corp", "Lynbrook East Rockaway Soccer Club", "Lynbrook Titans Football Corp.", "Pioneer Sports"]}, {"n": 248, "d": "Sports", "c": "Personal Trainer", "m": []}, {"n": 249, "d": "Sports", "c": "Personal Training Facility", "m": ["Iron Monkey Strength", "5 Corners Fitness"]}, {"n": 250, "d": "Sports", "c": "Pilates", "m": []}, {"n": 251, "d": "Sports", "c": "Pool Hall", "m": []}, {"n": 252, "d": "Sports", "c": "Yoga", "m": ["Body & Brain Holistic Yoga - Taichi", "The Little Lotus of Lynbrook"]}, {"n": 253, "d": "Vehicles, Dealers & Services", "c": "Auto Body/Collision", "m": ["Carstar Celebrity Chase Collision", "North Star Collision"]}, {"n": 254, "d": "Vehicles, Dealers & Services", "c": "Auto Dealer Service Department", "m": ["Crown Ford", "Infiniti of Lynbrook", "Sunrise Volkswagen Inc"]}, {"n": 255, "d": "Vehicles, Dealers & Services", "c": "Auto Repair \u2013 Independent", "m": []}, {"n": 256, "d": "Vehicles, Dealers & Services", "c": "Domestic Auto Dealer", "m": ["Crown Ford"]}, {"n": 257, "d": "Vehicles, Dealers & Services", "c": "Foreign Auto Dealership", "m": ["Sunrise Volkswagen Inc"]}, {"n": 258, "d": "Vehicles, Dealers & Services", "c": "Luxury Auto Dealership", "m": ["Infiniti of Lynbrook"]}, {"n": 259, "d": "Vehicles, Dealers & Services", "c": "Oil Change", "m": []}, {"n": 260, "d": "Vehicles, Dealers & Services", "c": "Preowned Car Dealer", "m": ["AutoConcierge NY", "ACA Auto Sales"]}, {"n": 261, "d": "Vehicles, Dealers & Services", "c": "Tire Center", "m": []}, {"n": 262, "d": "Wine & Spirits", "c": "Bar/Pub", "m": ["Johnny McGorey's", "Michaleen Flynn's", "Shannon Rose Pub", "Craft Kitchen & Taphouse", "Pearsall's Station", "Selita's Restaurant & Bar"]}, {"n": 263, "d": "Wine & Spirits", "c": "Brewery", "m": []}, {"n": 264, "d": "Wine & Spirits", "c": "Liquor Store", "m": []}, {"n": 265, "d": "Wine & Spirits", "c": "Place to Buy Beer/Beverage Center", "m": []}, {"n": 266, "d": "Wine & Spirits", "c": "Sports Bar", "m": ["Shannon Rose Pub", "Elsie Lane - Lynbrook", "Johnny McGorey's"]}, {"n": 267, "d": "Wine & Spirits", "c": "Wine Shop", "m": []}, {"n": 268, "d": "Wine & Spirits", "c": "Winery", "m": []}];
+const BALLOT = "https://www.liherald.com/long-island-choice/#//";
+// Herald ballot links go to the division page (no per-category links exist).
+const DIV_GROUP = {
+  "Beauty, Health & Wellness": 561564,
+  "Dining": 561565,
+  "Entertainment & Leisure": 561566,
+  "Finance": 561567,
+  "Home & Home Services": 561568,
+  "Kids & Education": 561569,
+  "People & Places": 561570,
+  "Services": 561571,
+  "Shopping": 561572,
+  "Sports": 561573,
+  "Vehicles, Dealers & Services": 561575,
+  "Wine & Spirits": 561576
+};
+const divLink = d => DIV_GROUP[d] ? "https://www.liherald.com/long-island-choice/#/gallery?group=" + DIV_GROUP[d] : BALLOT;
+// Shuffle nominees within each category once per visit so no business is always first.
+DATA.forEach(c => { for (let i = c.m.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [c.m[i], c.m[j]] = [c.m[j], c.m[i]]; } });
+const today = new Date().toLocaleDateString('en-CA');
+function load(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+let mine = new Set(load('lic_mine', []));
+let doneStore = load('lic_done', {});
+if (doneStore.day !== today) doneStore = { day: today, keys: [] };
+let done = new Set(doneStore.keys);
+let state = { q:'', div:'All', view:'cat', onlyMine:false, showEmpty:false };
+
+// Ballot order: divisions A to Z with Services first; categories A to Z inside each (matches the Herald sidebar).
+const divRank = d => d === 'Services' ? '0' : '1' + d;
+DATA.sort((x, y) => divRank(x.d).localeCompare(divRank(y.d)) || x.c.localeCompare(y.c, 'en', { sensitivity: 'base' }));
+const divisions = ['All', ...new Set(DATA.map(c => c.d))];
+const key = (c, m) => c + '||' + m;
+const esc = s => s.replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+
+function persist(){ save('lic_mine', [...mine]); save('lic_done', { day: today, keys: [...done] }); }
+function toast(t){ const el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 1400); }
+
+function copy(name, btn){
+  const ok = () => { btn.textContent = 'Copied'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(name).then(ok, () => fallback(name, ok));
+  else fallback(name, ok);
+}
+function fallback(name, ok){
+  const t = document.createElement('textarea'); t.value = name; t.style.position = 'fixed'; t.style.opacity = '0';
+  document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch(e) { toast(name); } t.remove();
+}
+
+function updateProgress(){
+  const cats = new Set([...done].map(k => k.split('||')[0]));
+  const n = cats.size;
+  document.getElementById('pcount').textContent = n; document.getElementById('plabel').textContent = n === 1 ? 'category' : 'categories';
+  document.getElementById('pgoal').textContent = n >= 25 ? 'Drawing goal reached ✓' : (25 - n) + ' more for the drawing';
+  document.getElementById('pbar').style.width = Math.min(100, n / 25 * 100) + '%';
+}
+
+function nomRow(cat, m, showCat){
+  const k = key(cat, m), isDone = done.has(k), isMine = mine.has(m);
+  return `<li class="nom ${isDone ? 'done' : ''}">
+    <button class="chk ${isDone ? 'on' : ''}" data-act="done" data-k="${esc(k)}" title="Mark nominated today" aria-label="Mark nominated today">${isDone ? '✓' : '○'}</button>
+    <span class="nm">${esc(showCat ? cat : m)}${showCat ? '' : ''}</span>
+    <button class="btn" data-act="copy" data-name="${esc(m)}">Copy</button>
+    <button class="star ${isMine ? 'on' : ''}" data-act="star" data-name="${esc(m)}" title="Add to My list" aria-label="Add to My list">${isMine ? '★' : '☆'}</button>
+  </li>`;
+}
+
+function render(){
+  const q = state.q.trim().toLowerCase();
+  const list = document.getElementById('list');
+  let html = '';
+  if (state.view === 'cat'){
+    const rows = DATA.filter(c => {
+      if (state.div !== 'All' && c.d !== state.div) return false;
+      let m = c.m;
+      if (state.onlyMine) m = m.filter(x => mine.has(x));
+      if (!state.showEmpty && !m.length) return false;
+      if (state.onlyMine && !m.length) return false;
+      if (q && !c.c.toLowerCase().includes(q) && !c.m.some(x => x.toLowerCase().includes(q))) return false;
+      return true;
+    });
+    html = rows.map(c => {
+      let m = state.onlyMine ? c.m.filter(x => mine.has(x)) : c.m;
+      if (q && !c.c.toLowerCase().includes(q)) m = m.filter(x => x.toLowerCase().includes(q));
+      const allDone = m.length && m.every(x => done.has(key(c.c, x)));
+      return `<div class="card ${m.length ? '' : 'empty'} ${allDone ? 'alldone' : ''}">
+        <div class="ch"><div><div class="cd">${esc(c.d)}</div><h2 class="ct">${esc(c.c)}</h2></div><a class="go" href="${divLink(c.d)}" target="_blank" rel="noopener">Nominate ↗</a></div>
+        ${m.length ? `<ul class="noms">${m.map(x => nomRow(c.c, x, false)).join('')}</ul>` : `<p class="none">No Chamber match yet. Know a local favorite? Write it in on the ballot.</p>`}
+      </div>`;
+    }).join('');
+  } else {
+    const biz = {};
+    DATA.forEach(c => c.m.forEach(m => { (biz[m] = biz[m] || []).push(c); }));
+    const names = Object.keys(biz).sort((a, b) => a.localeCompare(b)).filter(m => {
+      if (state.onlyMine && !mine.has(m)) return false;
+      const cs = biz[m].filter(c => state.div === 'All' || c.d === state.div);
+      if (!cs.length) return false;
+      if (q && !m.toLowerCase().includes(q) && !cs.some(c => c.c.toLowerCase().includes(q))) return false;
+      return true;
+    });
+    html = names.map(m => {
+      const cs = biz[m].filter(c => state.div === 'All' || c.d === state.div);
+      const isMine = mine.has(m);
+      return `<div class="card ${isMine ? 'mine' : ''}">
+        <div class="ch"><h2 class="ct">${esc(m)}</h2>
+          <span><button class="btn" data-act="copy" data-name="${esc(m)}">Copy</button>
+          <button class="star ${isMine ? 'on' : ''}" data-act="star" data-name="${esc(m)}" aria-label="Add to My list">${isMine ? '★' : '☆'}</button></span></div>
+        <ul class="noms">${cs.map(c => {
+          const k = key(c.c, m), d = done.has(k);
+          return `<li class="nom ${d ? 'done' : ''}"><button class="chk ${d ? 'on' : ''}" data-act="done" data-k="${esc(k)}" aria-label="Mark nominated today">${d ? '✓' : '○'}</button><span class="nm">${esc(c.c)}<small>${esc(c.d)}</small></span><a class="go sm" href="${divLink(c.d)}" target="_blank" rel="noopener">Nominate ↗</a></li>`;
+        }).join('')}</ul>
+      </div>`;
+    }).join('');
+  }
+  list.innerHTML = html || `<div class="empty-state">Nothing matches. Try another search or chip.</div>`;
+  updateProgress();
+}
+
+function renderChips(){
+  document.getElementById('chips').innerHTML = divisions.map(d => `<button class="chip ${d === state.div ? 'on' : ''}" data-div="${esc(d)}">${esc(d)}</button>`).join('');
+}
+
+document.getElementById('chips').addEventListener('click', e => {
+  const b = e.target.closest('[data-div]'); if (!b) return;
+  state.div = b.dataset.div; renderChips(); render();
+});
+document.getElementById('q').addEventListener('input', e => { state.q = e.target.value; render(); });
+document.getElementById('onlyMine').addEventListener('change', e => { state.onlyMine = e.target.checked; render(); });
+document.getElementById('showEmpty').addEventListener('change', e => { state.showEmpty = e.target.checked; render(); });
+document.getElementById('vCat').addEventListener('click', () => { state.view = 'cat'; vCat.classList.add('on'); vBiz.classList.remove('on'); render(); });
+document.getElementById('vBiz').addEventListener('click', () => { state.view = 'biz'; vBiz.classList.add('on'); vCat.classList.remove('on'); render(); });
+document.getElementById('list').addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  if (b.dataset.act === 'copy') copy(b.dataset.name, b);
+  if (b.dataset.act === 'star'){ const n = b.dataset.name; mine.has(n) ? mine.delete(n) : mine.add(n); persist(); render(); toast(mine.has(n) ? 'Added to My list' : 'Removed from My list'); }
+  if (b.dataset.act === 'done'){ const k = b.dataset.k; done.has(k) ? done.delete(k) : done.add(k); persist(); render(); }
+});
+
+renderChips(); render();
+</script>
+</body>
+</html>
